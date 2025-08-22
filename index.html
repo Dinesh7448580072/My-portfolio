@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Portfolio</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Devicon Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+
+  <style>
+/* General */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #0a0a0a, #1a1a2e 50%, #16213e);
+    color: #e0e0e0;
+}
+
+/* Section wrapper */
+.section-wrapper {
+    padding: 60px 20px;
+    margin: 40px auto;
+    max-width: 1200px;
+    border-radius: 20px;
+    background: #111827;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+    transition: transform 0.3s;
+}
+.section-wrapper:hover { transform: translateY(-5px); }
+
+h1, h2, nav li { font-family: 'Poppins', sans-serif; }
+
+/* Navigation */
+nav {
+    background: rgba(0, 0, 50, 0.9);
+    backdrop-filter: blur(8px);
+    padding: 18px 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: all 0.3s ease-in-out;
+    flex-wrap: wrap;
+}
+nav.shrink {
+    padding: 10px 40px;
+    background: rgba(0, 0, 70, 0.95);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.6);
+}
+nav h1 {
+    font-size: 26px;
+    color: #00aaff;
+    margin: 0;
+    font-weight: 600;
+}
+nav ul {
+    list-style: none;
+    margin: 10px 0 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+nav li {
+    margin: 8px 20px;
+    font-weight: bold;
+    color: #ffffff;
+    cursor: pointer;
+    position: relative;
+    transition: color 0.3s ease;
+    font-size: 16px;
+}
+nav li::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0%;
+    height: 2px;
+    background: #00aaff;
+    transition: width 0.3s ease-in-out;
+}
+nav li:hover { color: #00aaff; }
+nav li:hover::after { width: 100%; }
+
+/* Container for logo + title */
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Logo image */
+.logo {
+    width: 35px;
+    height: 35px;
+    border-radius: 6px;  /* makes favicon look neat */
+}
+
+/* My Details */
+.MyDetails {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+.MyDetails-left {
+    flex: 1 1 300px;
+    text-align: center;
+}
+.MyPhoto {
+    border-radius: 50%;
+    width: 180px;
+    height: 180px;
+    margin-bottom: 20px;
+    object-fit: cover;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.5);
+}
+.MyName {
+    font-size: 2rem;
+    color: #00aaff;
+    margin: 10px 0 5px 0;
+    font-weight: bold;
+}
+
+/* Roles Transition Effect */
+.MyRole {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 20px;
+  flex-wrap: nowrap;
+}
+.MyRole span.static { color: #aaa; white-space: nowrap; }
+.animated-roles {
+  display: inline-block;
+  position: relative;
+  min-width: 220px;
+  padding-left:10px;
+  height: 1.2em;
+  overflow: hidden;
+  white-space: nowrap;
+  background: #0f172a;
+  border: 3px solid transparent;
+  background-image: linear-gradient(#0f172a, #0f172a), 
+    linear-gradient(270deg, #00aaff, #004e92, #2563eb, #1e40af);
+  background-clip: padding-box, border-box;
+  background-origin: border-box;
+  animation: borderFlow 8s linear infinite;
+}
+.animated-roles span {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  opacity: 0;
+  animation: showRole 9s infinite;
+  line-height: 1.2em;
+  white-space: nowrap;
+}
+.animated-roles span:nth-child(1) { animation-delay: 0s; color: #00aaff; }
+.animated-roles span:nth-child(2) { animation-delay: 3s; color: #00aaff; }
+.animated-roles span:nth-child(3) { animation-delay: 6s; color: #00aaff; }
+
+@keyframes showRole {
+  0% { opacity: 0; transform: translateY(100%); }
+  10% { opacity: 1; transform: translateY(0); }
+  30% { opacity: 1; transform: translateY(0); }
+  40% { opacity: 0; transform: translateY(-100%); }
+  100% { opacity: 0; }
+}
+
+/* Right side */
+.MyDetails-right {
+    flex: 1 1 300px;
+    padding: 20px;
+    text-align: center;
+}
+.MyDetails-right h2 {
+    font-size: 1.6rem;
+    color: #00aaff;
+    margin-bottom: 15px;
+}
+.MyDetails-right p {
+    font-size: 1rem;
+    color: #cbd5e1;
+    line-height: 1.6;
+    margin-bottom: 25px;
+
+  .skillsAbout {
+    color: #00aaff;
+  }
+}
+.resume-btn {
+    display: inline-block;
+    padding: 12px 25px;
+    font-size: 16px;
+    font-weight: 600;
+    background: linear-gradient(135deg, #000428, #004e92);
+    color: #fff;
+    border-radius: 30px;
+    text-decoration: none;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.5);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.resume-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.7);
+}
+
+/* Skills */
+#Skills h2 { text-align: center; color:#00aaff; }
+.skills-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+.skill-card {
+    background: #1a1a2e;
+    padding: 20px;
+    width: 140px;
+    height: 140px;
+    border-radius: 18px;
+    box-shadow: 0 8px 15px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 15px;
+    color: #e0e0e0;
+    transition: transform 0.3s, box-shadow 0.3s, background 0.3s, color 0.3s;
+    cursor: pointer;
+}
+.skill-card i { font-size: 40px; margin-bottom: 10px; }
+.skill-card:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 15px 25px rgba(0,0,0,0.7);
+    background-color: #004e92;
+    color: #ffffff;
+}
+.skill-score {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(135deg, #000428, #004e92);
+  padding: 6px 14px;
+  border-radius: 20px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: all 0.4s ease;
+}
+.skill-card:hover .skill-score { opacity: 1; bottom: 25px; }
+.skill-hint { color: #888; font-size: 12px; text-align:center; margin-top:15px; }
+
+/* Education */
+#Education h2 { text-align: center; margin-bottom: 40px; color:#00aaff; font-weight:700; }
+.education-container {
+    position: relative;
+    max-width: 800px;
+    margin: auto;
+    padding-left: 20px;
+}
+.education-container::before {
+    content: "";
+    position: absolute;
+    left: 20px;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg, #000428, #004e92);
+    border-radius: 4px;
+}
+.edu-card {
+    position: relative;
+    background: #0f172a;
+    margin: 20px 0 20px 60px;
+    padding: 20px 25px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    transition: all 0.3s ease;
+}
+.edu-card::before {
+    content: "";
+    position: absolute;
+    left: -40px;
+    top: 25px;
+    width: 18px;
+    height: 18px;
+    background: #004e92;
+    border: 3px solid #111827;
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px rgba(0, 78, 146, 0.5);
+}
+.edu-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    border-left: 6px solid #00aaff;
+}
+.edu-card h3 { color:#00aaff; }
+.edu-card p { color:#cbd5e1; }
+.edu-card span {
+    font-size: 13px;
+    font-weight: 600;
+    color: #00aaff;
+    background: #1e293b;
+    padding: 4px 10px;
+    border-radius: 12px;
+}
+
+/* Projects */
+#Projects h2 { text-align:center; color:#00aaff; margin-bottom:40px; font-weight:700; }
+.projects-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+.project-card {
+  background: #0f172a;
+  padding: 25px 22px;
+  border-radius: 20px;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.6);
+  text-align: left;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+.project-card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 180deg, #000428, #004e92, #00aaff, #16213e);
+  animation: rotateBorder 8s linear infinite;
+  opacity: 0.1;
+}
+@keyframes rotateBorder { 100% { transform: rotate(360deg); } }
+.project-card h3 { color:#00aaff; }
+.project-card p { color:#cbd5e1; }
+.project-card span {
+  color:#00aaff;
+  background: #1e293b;
+  padding: 5px 12px;
+  border-radius: 12px;
+}
+.project-card:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+}
+
+/* Footer */
+.footer {
+  background: rgba(0, 0, 50, 0.9);
+  color: #fff;
+  padding: 25px 20px;
+  text-align: center;
+  margin-top: 50px;
+  border-radius: 20px 20px 0 0;
+  box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.6);
+}
+.footer-links a {
+  color: #fff;
+  font-size: 20px;
+  transition: color 0.3s, transform 0.3s;
+}
+.footer-links a:hover {
+  color: #00aaff;
+  transform: translateY(-3px);
+}
+
+/* Fullscreen canvas for stars */
+#stars {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;   /* behind everything */
+  background: black; /* fallback */
+}
+
+/* Responsive */
+@media(max-width: 992px){
+    .MyDetails { flex-direction: column; text-align: center; }
+    .MyDetails-right { text-align: center; padding: 15px; }
+    nav { flex-direction: column; align-items: center; }
+    nav ul { margin-top: 10px; }
+    .education-container::before { left: 10px; }
+    .edu-card { margin-left: 40px; }
+    .edu-card::before { left: -30px; }
+}
+@media(max-width: 600px){
+    .MyName { font-size: 1.6rem; }
+    .MyRole { font-size: 1rem; flex-direction: column; gap: 4px; }
+    .animated-roles { min-width: 180px; font-size: 0.9rem; }
+    .skill-card { width: 120px; height: 120px; font-size: 14px; }
+    .edu-card, .project-card { width: 90%; margin-left: 30px; }
+    .edu-card::before { left: -25px; }
+    nav li { font-size: 14px; margin: 5px 10px; }
+    .resume-btn { padding: 10px 20px; font-size: 14px; }
+}
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+<nav id="navbar">
+  <div class="logo-container">
+    <!-- Using favicon as logo -->
+    <img src="briefcase.png" alt="Logo" class="logo">
+    <h1>My Portfolio</h1>
+  </div>
+  <ul>
+    <li onclick="scrollToSection('MyDetails')">About</li>
+    <li onclick="scrollToSection('Skills')">Skills</li>
+    <li onclick="scrollToSection('Education')">Education</li>
+    <li onclick="scrollToSection('Projects')">Projects</li>
+  </ul>
+</nav>
+
+<!-- Star background canvas -->
+<canvas id="stars"></canvas>
+
+  <!-- My Details -->
+  <div id="MyDetails" class="MyDetails section-wrapper">
+    <div class="MyDetails-left">
+      <img class="MyPhoto" src="Dinesh_Circle.jpg" alt="Dinesh Pugal">
+      <h1 class="MyName">Dinesh Pugalendhi</h1>
+      <h2 class="MyRole">
+        <span class="static">I am looking for</span>
+        <span class="animated-roles">
+          <span>Full Stack Developer</span>
+          <span>Java Backend Developer</span>
+          <span>Frontend Developer</span>
+        </span>
+      </h2>
+    </div>
+    <div class="MyDetails-right">
+      <h2>About Me</h2>
+      <p>
+      I am a Full Stack Developer skilled in <strong class="skillsAbout">Java, Spring Boot, ReactJS, JavaScript, HTML, CSS, SQL, and PostgreSQL</strong>, with a passion for building secure, scalable, and user-friendly applications. A Computer Science graduate from SRM University, I have developed projects like a Task Manager App and a JWT-based Authentication System. With strong expertise across frontend and backend technologies, I combine problem-solving, adaptability, and continuous learning to deliver impactful solutions in dynamic IT environments.
+    </p>
+      <a href="Dinesh-P Resum.pdf" class="resume-btn" target="_blank">View Resume</a>
+    </div>
+  </div>
+
+  <!-- Skills -->
+  <div id="Skills" class="section-wrapper">
+    <h2>My Skills</h2>
+    <div class="skills-container">
+      <div class="skill-card"><i class="devicon-java-plain colored"></i>Java<div class="skill-score">70 / 100</div></div>
+      <div class="skill-card"><i class="devicon-mysql-plain colored"></i>SQL<div class="skill-score">70 / 100</div></div>
+      <div class="skill-card"><i class="devicon-spring-plain colored"></i>Spring Boot<div class="skill-score">60 / 100</div></div>
+      <div class="skill-card"><i class="devicon-html5-plain colored"></i>HTML<div class="skill-score">80 / 100</div></div>
+      <div class="skill-card"><i class="devicon-css3-plain colored"></i>CSS<div class="skill-score">80 / 100</div></div>
+      <div class="skill-card"><i class="devicon-javascript-plain colored"></i>JavaScript<div class="skill-score">70 / 100</div></div>
+      <div class="skill-card"><i class="devicon-react-original colored"></i>ReactJS<div class="skill-score">60 / 100</div></div>
+    </div>
+    <p class="skill-hint">💡 Hover over a skill card to view proficiency score</p>
+  </div>
+
+  <!-- Education -->
+  <div id="Education" class="section-wrapper">
+    <h2>My Education</h2>
+<div class="education-container">
+        <div class="edu-card">
+          <h3>B.Sc Computer Science</h3>
+          <p>SRM University, Chennai</p>
+          <span>2019 - 2022</span>
+          <p><strong>CGPA:</strong> 7.9</p>
+        </div>
+        <div class="edu-card">
+          <h3>HSC (12th)</h3>
+          <p>Assisi Matriculation Higher Secondary School, Chennai</p>
+          <span>2018 - 2019</span>
+          <p><strong>Percentage:</strong> 52.17%</p>
+        </div>
+        <div class="edu-card">
+          <h3>SSLC (10th)</h3>
+          <p>Assisi Matriculation Higher Secondary School, Chennai</p>
+          <span>2016 - 2017</span>
+          <p><strong>Percentage:</strong> 79.6%</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Projects Section -->
+    <div id="Projects" class="section-wrapper">
+      <h2>My Projects</h2>
+      <div class="projects-container">
+        <div class="project-card">
+          <h3>Task Manager Application</h3>
+          <p>Created APIs to manage tasks and users using <strong>Spring Boot</strong> and <strong>PostgreSQL</strong>.</p>
+          <p>Applied clean architecture with <em>Controller-Service-Repository</em> layers.</p>
+          <span>Java, Spring Boot, PostgreSQL</span>
+        </div>
+        <div class="project-card">
+          <h3>User Authentication System</h3>
+          <p>Developed secure login/signup functionality using <strong>Spring Security</strong>.</p>
+          <p>Implemented <em>JWT tokens</em> for authentication and authorization.</p>
+          <span>Java, Spring Boot, JWT</span>
+        </div>
+      </div>
+    </div>
+
+  <!-- Footer -->
+<footer class="footer">
+  <div class="footer-content">
+    <p>&copy; 2025  |  Dinesh Pugalendhi</p>
+    <div class="footer-links">
+      <!-- GitHub -->
+      <a href="https://github.com/Dinesh7448580072" target="_blank">
+        <i class="devicon-github-original"></i>
+      </a>
+      <!-- LinkedIn -->
+      <a href="https://linkedin.com/in/Dinesh-P000" target="_blank">
+        <i class="devicon-linkedin-plain"></i>
+      </a>
+      <!-- Gmail -->
+      <a href="mailto:dineshabdina3@gmail.com">
+        <i class="devicon-google-plain"></i>
+      </a>
+    </div>
+  </div>
+</footer>
+
+    <script>
+      function scrollToSection(sectionId) {
+        const section = document.getElementById(sectionId);
+        if (section) section.scrollIntoView({ behavior: 'smooth' });
+    } 
+    window.addEventListener("scroll", function() { 
+      const navbar = document.getElementById("navbar"); 
+      if (window.scrollY > 50) navbar.classList.add("shrink"); 
+      else 
+      navbar.classList.remove("shrink"); }); 
+
+    const canvas = document.getElementById("stars");
+const ctx = canvas.getContext("2d");
+
+let stars = [];
+let numStars = 200;
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+
+function createStars() {
+  stars = [];
+  for (let i = 0; i < numStars; i++) {
+    stars.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      radius: Math.random() * 1.5,
+      speed: Math.random() * 0.5 + 0.2
+    });
+  }
+}
+createStars();
+
+function animateStars() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "white";
+  stars.forEach(star => {
+    ctx.beginPath();
+    ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+    ctx.fill();
+    // Move stars down
+    star.y += star.speed;
+    if (star.y > canvas.height) {
+      star.y = 0;
+      star.x = Math.random() * canvas.width;
+    }
+  });
+  requestAnimationFrame(animateStars);
+}
+animateStars();  
+    </script>
+  </body>
+  </html> 
