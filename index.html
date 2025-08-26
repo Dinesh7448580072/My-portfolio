@@ -419,6 +419,77 @@ nav li:hover::after { width: 100%; }
   .skill-card { width: 100px; height: 100px; font-size: 12px; }
   .animated-roles { min-width: 150px; font-size: 0.8rem; }
 }
+
+/* About Section */
+.about-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.about-card {
+  padding: 30px;
+  border-radius: 20px;
+  position: relative;
+  background: #0f172a;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  border: 2px solid transparent;
+  overflow: hidden;
+}
+
+.about-card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 180deg, #00aaff, #004e92, #2563eb, #00aaff);
+  animation: spinGradient 8s linear infinite;
+  z-index: 0;
+  opacity: 0.1;
+}
+
+.about-card h2, 
+.about-card p {
+  position: relative;
+  z-index: 1;
+}
+
+.about-card h2 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  color: #00aaff;
+}
+
+.about-card p {
+  font-size: 1rem;
+  color: #cbd5e1;
+  line-height: 1.6;
+}
+
+.about-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.7);
+  border: 2px solid #00aaff;
+}
+
+/* Different background for Hire Me card */
+.hire-card {
+  background: linear-gradient(135deg, #111827, #1e293b);
+}
+
+@keyframes spinGradient {
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive */
+@media(max-width: 600px) {
+  .about-card h2 { font-size: 1.4rem; }
+  .about-card p { font-size: 0.95rem; }
+}
   </style>
 </head>
 <body>
@@ -522,6 +593,26 @@ nav li:hover::after { width: 100%; }
       </div>
     </div>
 
+<!-- About Section -->
+<div id="AboutMe" class="section-wrapper about-section">
+  <div class="about-card">
+    <h2>About Me</h2>
+    <p>
+      I completed my B.Sc. in Computer Science in 2022 and started my career in a non-IT KPO healthcare company. However, I realized my true passion lies in software development, which motivated me to transition into IT and pursue Full Stack Java Development. <br><br>
+      I have a solid foundation in <strong>Core Java, Spring Boot, SQL, HTML, CSS, JavaScript, and Python</strong>, and I am currently enhancing my skills in Java, Web Development, and REST API integration. <br><br>
+      As part of my learning, I have built projects such as a <em>Task Manager Application</em>, a <em>User Authentication System</em>, and a <em>Personal Portfolio Website</em>. These experiences helped me apply concepts like OOP, Collections, and Exception Handling to practical scenarios.
+    </p>
+  </div>
+  <div class="about-card hire-card">
+    <h2>Why You Should Hire Me</h2>
+    <p>
+      I bring a strong technical foundation in Java and modern web technologies, with hands-on project experience. <br><br>
+      I am highly adaptable — having transitioned from a non-IT role, I understand the importance of learning quickly and applying knowledge effectively. <br><br>
+      I have a problem-solving mindset and can contribute to both frontend and backend development. <br><br>
+      I am eager to grow, learn from real-world projects, and contribute meaningfully to your team’s success.
+    </p>
+  </div>
+</div>
   <!-- Footer -->
 <footer class="footer">
   <div class="footer-content">
